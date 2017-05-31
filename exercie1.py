@@ -31,14 +31,23 @@ def get_data(symbols, dates):
 
 def test_run():
     # Define a date range
-    dates = pd.date_range('2010-01-22', '2010-01-26')
+    dates = pd.date_range('2010-01-01', '2010-12-31')
 
     # Choose stock symbols to read
     symbols = ['GOOG', 'IBM', 'GLD']
 
     # Get stock data
     df = get_data(symbols, dates)
-    print df
+    # print df
+
+    # Row Indexing using iloc and loc
+    # print df.loc['2010-01-01':'2010-01-31']  # month of January
+
+    # Column Slicing
+    # print df[['IBM', 'GOOG']]  # Multiple Stocks
+
+    # Row + Column Slicing
+    # print df.loc['2010-01-01':'2010-01-31', ['IBM', 'GOOG']]
 
 
 if __name__ == "__main__":
