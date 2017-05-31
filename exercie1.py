@@ -24,7 +24,8 @@ def get_data(symbols, dates):
                             na_values='nan')
         dfSym = dfSym.rename(columns={'Adj Close': symbol})
         df = df.join(dfSym, how='inner')
-
+#        if symbol == 'SPY':
+#            df = df.dropna(subset=['SPY'])
     return df
 
 
