@@ -2,6 +2,15 @@
 
 import os
 import pandas as pd
+import matplotlib.pyplot as plt
+
+
+def plot_data(df, title="Stock prices"):
+    """Plot stock prices with a custom title and meaningful axis labels."""
+    ax = df.plot(title=title, fontsize=12)
+    ax.set_xlabel("Date")
+    ax.set_ylabel("Price")
+    plt.show()
 
 
 def symbol_to_path(symbol, base_dir="data"):
@@ -29,6 +38,20 @@ def get_data(symbols, dates):
     return df
 
 
+def plot_selected(df, symbol, sd, ed):
+
+    # Slice
+    df = df.loc[sd:ed, symbol]
+    df = normalize(df)
+    # plot_selected
+    plot_data(df)
+
+
+def normalize(df):
+    # Normalize using the first row of data
+    return df / df.iloc[0]
+
+
 def test_run():
     # Define a date range
     dates = pd.date_range('2010-01-01', '2010-12-31')
@@ -48,6 +71,12 @@ def test_run():
 
     # Row + Column Slicing
     # print df.loc['2010-01-01':'2010-01-31', ['IBM', 'GOOG']]
+
+    # ax = df.plot.line(title="Stock Prices", fontsize=2)
+    # ax.set_xlabel("Date")
+    # ax.set_ylabel("Price")
+    # plt.show()
+    plot_selected(df, ['SPY', 'IBM', 'GOOG', 'GLD'], '2010-01-01', '2010-12-31')
 
 
 if __name__ == "__main__":
